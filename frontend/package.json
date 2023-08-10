@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm i",
+    "build": "react-scripts build",
     "watch": "tailwindcss -i ./src/input.css -o ./src/dist/output.css --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
