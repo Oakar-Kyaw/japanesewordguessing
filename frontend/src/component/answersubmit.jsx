@@ -18,10 +18,7 @@ export const AnswerSubmit =({socket})=>{
        rightRef.current.play()
      })
 
-     //when receive play right 
-     socket.on("playwrong",()=>{
-      wrongRef.current.play()
-     })
+    
 
     
      //deactivate or activate submit button function

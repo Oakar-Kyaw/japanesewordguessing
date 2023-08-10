@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
           }
         }
         io.to([room.id,socket.id,player1]).emit("joined");
-        io.to([room.id,socket.id,player1]).emit("nextQuestion");
+        io.to([room.id,socket.id,player1]).emit("generateQuestion",socket.id);
         console.log("room are "+ JSON.stringify(rooms))
     }
     else {
@@ -229,7 +229,7 @@ io.on('connection', (socket) => {
 
         setTimeout(()=>{
          io.to([roomid,id,nextClient]).emit('nextQuestion') 
-        },4000)
+        },1000)
         
         
     })
