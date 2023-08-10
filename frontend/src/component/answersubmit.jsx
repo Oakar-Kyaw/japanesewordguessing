@@ -70,7 +70,7 @@ export const AnswerSubmit =({socket})=>{
            return answer.toUpperCase() == value.answer.toUpperCase()});
           if(answerExist >= 0){
             rightRef.current.play()
-            socket.emit("isTrue",socket.id)
+          
             socket.emit("addPoint",socket.id)
             socket.emit("showAnswer", answer,socket.id,false);
            }

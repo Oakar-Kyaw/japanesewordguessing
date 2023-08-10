@@ -149,10 +149,10 @@ io.on('connection', (socket) => {
        
        //to get both of the client , write io.to([roomid,senderid,receiverId]).emit()
       io.to([foundRoomId,id,nextClient]).emit('setActive',room.playfirst,foundRoomId,setPlayerFirst)
-    
-      
        
     })
+
+   
      
      //when user submit answer and add point when the user is right
      socket.on("addPoint",(id)=>{
@@ -264,20 +264,7 @@ io.on('connection', (socket) => {
         io.to([roomid,id,nextClient]).emit('playwrong')
     })
 
-    //emit play song from server when the user click button
-    socket.on("playClick",(id)=>{
-      let nextClient;
-       let roomid = searchRoomId(rooms,id)
-       let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
-       let room = rooms[roomIndex];
-       
-        for (let player in room.players){
-          if (player != id){
-           nextClient = player;
-          }
-        }
-        io.to([roomid,id,nextClient]).emit('playclick')
-    })
+    
 
     //stop timer
     socket.on("showFalseIcon",(id)=>{

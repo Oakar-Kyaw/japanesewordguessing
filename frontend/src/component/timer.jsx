@@ -5,7 +5,7 @@ export const Timer = ({socket})=>{
     let secondRef = useRef(10);
     let intervalId;
     let timeoutId;
-    let countdown = 10;
+    let countdown = 25;
 
 socket.on("setActive", (id, roomId ,setPlayerFirst) => {
   if (id === socket.id && setPlayerFirst) {
@@ -16,7 +16,7 @@ socket.on("setActive", (id, roomId ,setPlayerFirst) => {
       secondRef.current.value = countdown;
       
       if (countdown === 0) {
-        countdown = 10;
+        countdown = 25;
         clearInterval(intervalId);
         return;
       }
@@ -25,23 +25,17 @@ socket.on("setActive", (id, roomId ,setPlayerFirst) => {
     timeoutId = setTimeout(() => {
       socket.emit("falseAnswer", id);
       socket.emit("playWrong",socket.id)
-    }, 10000);
+    }, 25000);
   }
   
 });
 
-socket.on("True",()=>{
-  clearInterval(intervalId);
-  clearTimeout(timeoutId);
-  countdown = 10;
-  secondRef.current.value = countdown;
-})
 
 socket.on("nextQuestion", (answer, id) => {
   
   clearInterval(intervalId);
   clearTimeout(timeoutId);
-  countdown = 10;
+  countdown = 25;
   secondRef.current.value = countdown;
 });
     return (
