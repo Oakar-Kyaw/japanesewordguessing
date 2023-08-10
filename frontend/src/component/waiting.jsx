@@ -9,6 +9,7 @@ export const WaitingForOtherPlayer = ({socket}) => {
     })
     socket.on("joined",()=>{
         waitingRef.current.classList.add('hidden');
+        socket.emit("generateQuestion",socket.id)
     })
     return (
       <div className="hidden transition-all ease-in-out delay-5200 duration-1000 absolute h-full w-full z-50 flex flex-col justify-center items-center bg-grey bg-opacity-30" ref={waitingRef}>
