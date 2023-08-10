@@ -7,7 +7,10 @@ export const Question = ({socket})=>{
    const showquestion = useRef(null)
    //receive to generate question alert from server
 
-  
+  //to generate question 
+  socket.on("nextQuestion",()=>{
+     socket.emit('generateQuestion',socket.id)
+  })
 
    socket.on("question",(question,answer)=>{
         console.log('question '+question+" "+answer)
