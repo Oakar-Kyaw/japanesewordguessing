@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
           }
         }
         io.to([room.id,socket.id,player1]).emit("joined");
-        socket.emit("generateQuestion",socket.id);
+        io.to([room.id,socket.id,player1]).emit("generateQuestiontoclient",socket.id);
         console.log("room are "+ JSON.stringify(rooms))
     }
     else {

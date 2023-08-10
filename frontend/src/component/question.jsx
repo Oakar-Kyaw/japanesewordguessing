@@ -5,7 +5,10 @@ import { Questions } from "../constant/constant";
 export const Question = ({socket})=>{
    let showQuestion;
    const showquestion = useRef(null)
-   
+   //receive to generate question alert from server
+   socket.on("generateQuestiontoclient",(id)=>{
+    socket.emit("generateQuestion",id);
+   })
    socket.on("question",(question,answer)=>{
         console.log('question '+question+" "+answer)
         showquestion.current.value = question ;
