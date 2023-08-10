@@ -60,6 +60,7 @@ io.on('connection', (socket) => {
           }
         }
         io.to([room.id,socket.id,player1]).emit("joined");
+
         console.log("room are "+ JSON.stringify(rooms))
     }
     else {

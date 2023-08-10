@@ -7,6 +7,8 @@ export const Question = ({socket})=>{
    const showquestion = useRef(null)
    //receive to generate question alert from server
 
+  
+
    socket.on("question",(question,answer)=>{
         console.log('question '+question+" "+answer)
         showquestion.current.value = question ;
