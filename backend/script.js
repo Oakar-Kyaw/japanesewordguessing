@@ -60,8 +60,6 @@ io.on('connection', (socket) => {
           }
         }
         io.to([room.id,socket.id,player1]).emit("joined");
-
-        console.log("room are "+ JSON.stringify(rooms))
     }
     else {
         //create room if there is no vacant or first user
@@ -101,13 +99,11 @@ io.on('connection', (socket) => {
       
          if(room.players[id].point > room.players[nextClient].point ){
              winUser = id;
-             console.log("win User is "+ winUser)
              io.to([foundRoomId,id,nextClient]).emit('win',winUser)
             
          }
          else if (room.players[id].point < room.players[nextClient].point){
               winUser = nextClient;
-              console.log("win User is "+ winUser)
               io.to([foundRoomId,id,nextClient]).emit('win',winUser)
               
          }
@@ -122,7 +118,6 @@ io.on('connection', (socket) => {
         let question = Questions[random].question ;
         let answer = Questions[random].rightanswer;
         let questionanswer = Questions[random].answer;
-        console.log("generatequestion is "+question+ " "+ answer)
         //send to client
         io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
 
@@ -223,7 +218,6 @@ io.on('connection', (socket) => {
         if(!notAddLevel){
             room.level++ ;
         }
-        console.log("room are leevel are"+ JSON.stringify(rooms))
         io.to([roomid,id,nextClient]).emit('show',answer,id)
 
         setTimeout(()=>{
@@ -295,5 +289,4 @@ io.on('connection', (socket) => {
 
  });
 server.listen(PORT,()=>{
-    console.log("server i s runding at port "+PORT)
 })

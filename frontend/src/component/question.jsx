@@ -14,7 +14,7 @@ export const Question = ({socket})=>{
   })
 
    socket.on("question",(question,answer,questionanswer)=>{
-        console.log('question '+question+" "+answer)
+     
         showquestion.current.value = question ;
         showanswer.current.value = questionanswer ;
         localStorage.setItem('question', JSON.stringify({questionanswer:questionanswer,answer:answer}))

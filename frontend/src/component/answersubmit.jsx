@@ -40,9 +40,6 @@ export const AnswerSubmit =({socket})=>{
      
       //acitvate submit button
       socket.on("setActive",(receiveId)=>{
-        
-        console.log("receiver id  is "+receiveId);
-        console.log("id is "+socket.id)
         if(socket.id == receiveId){
           Buttons(false,"bg-right","bg-buttonDisable");
         }
@@ -63,7 +60,6 @@ export const AnswerSubmit =({socket})=>{
         
          console.log("this is submit value "+answer)
           let answerExist = answer.findIndex(answer=>{
-            console.log("saved answer is "+answer)
            return answer == value.answer});
           if(answerExist >= 0){
             rightRef.current.play()
