@@ -21,7 +21,7 @@ export const Question = ({socket})=>{
    
    
     return (
-        <div className="p-4 m-6 h-30 space-y-3 justify-center items-center font-poppins bg-white">
+        <div className="p-4 m-6 w-full h-30 space-y-3 justify-center items-center font-poppins bg-white">
         
         <h1 className="text-center text-mark font-[30px] font-bold">Question</h1>
         <p className="text-center"><input type="text" className="h-8 font-poppins p-4 focus:outline-none w-full text-center text-blue" ref={showquestion} value="" readOnly/>  </p>
