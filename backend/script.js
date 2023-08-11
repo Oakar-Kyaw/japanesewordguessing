@@ -229,7 +229,7 @@ io.on('connection', (socket) => {
 
         setTimeout(()=>{
          io.to([roomid,id,nextClient]).emit('nextQuestion') 
-        },1000)
+        },3000)
         
         
     })

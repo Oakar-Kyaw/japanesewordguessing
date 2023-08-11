@@ -23,7 +23,7 @@ export const App = ()=>{
     <div className={`text-[18px] md:text-xl bg-primary font-poppins h-screen w-screen text-lg relative `} > 
        <WaitingForOtherPlayer socket={socket}/>
        <WinningCard socket={socket}/>
-       <div className=" bg-[url(https://cdn.mos.cms.futurecdn.net/tnk229NQH3hSUPXLDBKNUA.jpg)] bg-center bg-cover p-1 w-full">
+       <div className=" bg-[url(https://cdn.mos.cms.futurecdn.net/tnk229NQH3hSUPXLDBKNUA.jpg)] bg-center bg-cover p-1 w-screen">
        <Announcement socket={socket} /> 
        <Timer socket = {socket} />
        <AnswerInput socket={socket}  />
