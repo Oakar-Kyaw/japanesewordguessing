@@ -3,8 +3,9 @@ import { useEffect, useRef } from "react";
 import { Questions } from "../constant/constant";
 
 export const Question = ({socket})=>{
-   let showQuestion;
+   
    const showquestion = useRef(null)
+   const showanswer = useRef(null)
    //receive to generate question alert from server
 
   //to generate question 
@@ -12,11 +13,11 @@ export const Question = ({socket})=>{
      socket.emit('generateQuestion',socket.id)
   })
 
-   socket.on("question",(question,answer)=>{
+   socket.on("question",(question,answer,questionanswer)=>{
         console.log('question '+question+" "+answer)
         showquestion.current.value = question ;
-
-        localStorage.setItem('question', JSON.stringify({answer:answer,level:"level1"}))
+        showanswer.current.value = questionanswer ;
+        localStorage.setItem('question', JSON.stringify({questionanswer:questionanswer,answer:answer}))
    })
    
    
@@ -25,6 +26,7 @@ export const Question = ({socket})=>{
         
         <h1 className="text-center text-mark font-[30px] font-bold">Question</h1>
         <p className="text-center"><input type="text" className="h-8 font-poppins p-4 focus:outline-none w-full text-center text-blue" ref={showquestion} value="" readOnly/>  </p>
+        <p className="text-center"><input type="text" className="h-8 font-poppins p-4 focus:outline-none w-full text-center text-blue" ref={showanswer} value="" readOnly/>  </p>
        
     </div>
     );

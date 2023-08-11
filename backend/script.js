@@ -120,10 +120,11 @@ io.on('connection', (socket) => {
       else {
         let random = Math.round(Math.random()*3);
         let question = Questions[random].question ;
-        let answer = Questions[random].answer;
+        let answer = Questions[random].rightanswer;
+        let questionanswer = Questions[random].answer;
         console.log("generatequestion is "+question+ " "+ answer)
         //send to client
-        io.to([foundRoomId,id,nextClient]).emit('question',question,answer)
+        io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
 
       }
       

@@ -1,30 +1,35 @@
 
 module.exports  =[
     {
-        question:"若い大統領には経験不足という _______ がある",
-        answer:['彼' , 'かれ']
+        question:"分析",
+        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
+        rightanswer:['彼' , 'かれ']
 
     },
     {
         question:"What is the color of pen?",
-        answer:['Blue' , 'Red'],
+        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
+        rightanswer:['Blue' , 'Red'],
             
         
     },
     {
         question:"Who founded Facebook",
-        answer:['Zukerberg' , 'Elon Musk'],
+        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
+        rightanswer:['Zukerberg' , 'Elon Musk'],
              
     },
     {
         question:"Who is the main character in Training Day",
-        answer:['Denzel Washinton' , 'Ethan Hawke'],
+        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
+        rightanswer:['Denzel Washinton' , 'Ethan Hawke'],
             
     
     },
     {
         question:"One of the bar is broken. You think who broke it",
-        answer:['you' , 'me'],
+        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
+        rightanswer:['you' , 'me'],
             
     
     }
