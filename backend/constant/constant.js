@@ -2,34 +2,34 @@
 module.exports  =[
     {
         question:"分析",
-        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
-        rightanswer:['彼' , 'かれ']
+        answer:"Write its hiragana",
+        rightanswer:["ぶんせき"]
 
     },
     {
-        question:"What is the color of pen?",
-        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
-        rightanswer:['Blue' , 'Red'],
+        question:"しばらく一緒に仕事をして、彼なら物事を間違いなく進めてくれると信用した.",
+        answer:"Write its hiragana. Kanji : 物事",
+        rightanswer:['ものごと' ],
             
         
     },
     {
-        question:"Who founded Facebook",
-        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
-        rightanswer:['Zukerberg' , 'Elon Musk'],
+        question:"ご飯を＿＿ます",
+        answer:"",
+        rightanswer:['食べ' , 'たべ'],
              
     },
     {
-        question:"Who is the main character in Training Day",
-        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
-        rightanswer:['Denzel Washinton' , 'Ethan Hawke'],
+        question:"くつに石が入っています",
+        answer:"Write its hiragana. Kanji: 石",
+        rightanswer:["いし" ],
             
     
     },
     {
-        question:"One of the bar is broken. You think who broke it",
-        answer:"1)ぶんせき 2)ふんせき 3)ぶんぜき 4)ふんせぎ",
-        rightanswer:['you' , 'me'],
+        question:"日本で、いろいろな　経験を　しました。",
+        answer:"Write its hiragana. Kanji: 経験",
+        rightanswer:["けいけん"],
             
     
     }

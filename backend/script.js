@@ -69,7 +69,7 @@ io.on('connection', (socket) => {
         roomId: generateRoomId() ,
         vacant:true,
         playfirst:0,
-        attempt:4,
+        attempt:3,
         level:0,
         players:{
             [socket.id]:{
@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
          
      }
       else {
-        let random = Math.round(Math.random()*3);
+        let random = Math.round(Math.random() * Questions.length);
         let question = Questions[random].question ;
         let answer = Questions[random].rightanswer;
         let questionanswer = Questions[random].answer;
@@ -176,8 +176,6 @@ io.on('connection', (socket) => {
 
      //when user submit answer and give false answer
      socket.on("falseAnswer",(id)=>{
-      
-      
       let nextPlayer;
       let setPlayerFirst;
       let foundRoom = searchRoomId(rooms,id);

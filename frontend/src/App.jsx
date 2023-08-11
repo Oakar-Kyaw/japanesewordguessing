@@ -14,8 +14,8 @@ import { Timer } from "./component/timer";
 
 export const App = ()=>{
   
-
-   const socket = io("https://japanesewordgameapi.onrender.com/", {transports: ['websocket']});
+//https://japanesewordgameapi.onrender.com/
+   const socket = io("http://localhost:3001", {transports: ['websocket']});
    socket.on("saveRoom",(room)=>{
       localStorage.setItem('room',room)
    })

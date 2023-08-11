@@ -30,6 +30,12 @@ socket.on("setActive", (id, roomId ,setPlayerFirst) => {
   
 });
 
+socket.on("false",()=>{
+  clearInterval(intervalId);
+  clearTimeout(timeoutId);
+  countdown = 25;
+  secondRef.current.value = countdown;
+})
 
 socket.on("nextQuestion", (answer, id) => {
   

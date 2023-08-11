@@ -64,7 +64,7 @@ export const AnswerSubmit =({socket})=>{
          console.log("this is submit value "+answer)
           let answerExist = answer.findIndex(answer=>{
             console.log("saved answer is "+answer)
-           return answer.toUpperCase() == value.answer.toUpperCase()});
+           return answer == value.answer});
           if(answerExist >= 0){
             rightRef.current.play()
           
@@ -74,6 +74,8 @@ export const AnswerSubmit =({socket})=>{
           
           else {
            wrongRef.current.play();
+          
+          
           }
         
 
