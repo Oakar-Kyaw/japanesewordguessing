@@ -15,24 +15,20 @@ import { Timer } from "./component/timer";
 export const App = ()=>{
   
 //https://japanesewordgameapi.onrender.com/
-//http://localhost:3000
-   const socket = io("https://japanesewordgameapi.onrender.com/", {transports: ['websocket']});
+//http://localhost:3001
+   const socket = io("http://localhost:3001", {transports: ['websocket']});
    socket.on("saveRoom",(room)=>{
       localStorage.setItem('room',room)
    })
    return (
-    <div className={`text-[18px] md:text-xl bg-primary font-poppins h-screen w-screen text-lg relative `} > 
+    <div className={`bg-[url(https://i.pinimg.com/originals/57/54/a2/5754a2831f178390c807231401c8b832.jpg)] bg-center bg-cover text-[25px] text-bold md:text-xl bg-primary font-novo h-full text-lg relative bg-white `} > 
        <WaitingForOtherPlayer socket={socket}/>
        <WinningCard socket={socket}/>
-       <div className=" bg-[url(https://cdn.mos.cms.futurecdn.net/tnk229NQH3hSUPXLDBKNUA.jpg)] bg-center bg-cover p-1 w-screen">
        <Announcement socket={socket} /> 
        <Timer socket = {socket} />
        <AnswerInput socket={socket}  />
-      
        <DescisionButton  socket={socket} />
-       </div>
-       
-        <Question  socket={socket}/>
+       <Question  socket={socket}/>
        <AnswerSubmit socket={socket}/> 
    </div>
        

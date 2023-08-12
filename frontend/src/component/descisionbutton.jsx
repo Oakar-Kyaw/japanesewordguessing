@@ -35,7 +35,7 @@ export const DescisionButton = ({ socket }) => {
         Press "F2" To Answer First
       </div>
       <audio ref={clickRef} src={firstHit} />
-      <button className=" md:hidden text-white p-4 h-25 w-40 bg-mark rounded-sm" onClick={handleClick}>Click Here To Answer First</button>
+      <button className=" md:hidden text-mark" onClick={handleClick}>Click Here</button>
     </div>
   );
 };

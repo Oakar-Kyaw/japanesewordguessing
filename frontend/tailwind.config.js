@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     colors:{
       primary:"#DDCCF7",
-      secondary:"#525252",
+      secondary:"#000000",
       blue:"#0000F7",
       mark:"#EA040E",
       right:"#31B030",
@@ -13,7 +13,9 @@ module.exports = {
       buttonDisable:'#CCCCCC'
     },
     fontFamily:{
-      poppins:["poppins","serif"]
+      poppins:["poppins","serif"],
+      novo:['Nova Mono', "monospace"],
+      p2:['Press Start 2P', "cursive"] 
     },
     extend: {
       animation: {

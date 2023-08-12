@@ -22,12 +22,13 @@ export const Question = ({socket})=>{
    
    
     return (
-        <div className="p-4 m-6 w-screen space-y-3 justify-center items-center font-poppins bg-white">
+        <div className="p-4 m-6   justify-center items-center font-poppins ">
         
-        <h1 className="text-center text-mark font-[30px] font-bold">Question</h1>
-        <p className="text-center"><input type="text" className="h-12 font-poppins p-4 focus:outline-none w-full text-center text-blue" ref={showquestion} value="" readOnly/>  </p>
-        <p className="text-center"><input type="text" className="h-8 font-poppins p-4 focus:outline-none w-full text-center text-mark" ref={showanswer} value="" readOnly/>  </p>
-       
+        <h1 className="text-center text-mark font-[30px] font-bold mb-2">Question</h1>
+        <div className="flex flex-col">
+            <input type="text" className="flex p-4 focus:outline-none text-center text-secondary bg-primary flex-wrap"  ref={showquestion} value="" readOnly/>  
+            <input type="text" className="p-4 focus:outline-none bg-primary text-center text-mark "   ref={showanswer} value="" readOnly/>  
+        </div>
     </div>
     );
 }

@@ -60,6 +60,7 @@ io.on('connection', (socket) => {
           }
         }
         io.to([room.id,socket.id,player1]).emit("joined");
+        console.log(JSON.stringify(rooms))
     }
     else {
         //create room if there is no vacant or first user

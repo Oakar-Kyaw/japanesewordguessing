@@ -47,13 +47,9 @@ socket.on("nextQuestion", (answer, id) => {
     return (
         <section className="flex flex-col w-full ">
            <div className="flex flex-row items-center justify-center space-x-1 mb-2 mx-6 mt-2">
-             <div className="flex items-center justify-center h-6 w-6 bg-primary shadow-lg rounded-sm" > 
-             <input type="text" value={25} className="w-6 h-6 focus:outline-none bg-primary text-mark text-center"  
-             ref={secondRef} readOnly/></div>
-             <div className=" flex items-center justify-center h-6 w-6 bg-primary shadow-lg rounded-sm text-mark" >s</div>
-            
              
-
+             <input type="text" value={25} className="w-6 h-6 focus:outline-none bg-primary text-mark text-center"  
+             ref={secondRef} style={{backgroundColor:"transparent"}} readOnly/> <span className="text-mark">s</span>
            </div>
         </section>
     );
