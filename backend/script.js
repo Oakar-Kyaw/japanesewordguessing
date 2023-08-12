@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
          
      }
       else {
-        let random = Math.round(Math.random() * Questions.length);
+        let random = Math.round(Math.random() * (Questions.length -1));
         let question = Questions[random].question ;
         let answer = Questions[random].rightanswer;
         let questionanswer = Questions[random].answer;
