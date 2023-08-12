@@ -115,13 +115,17 @@ io.on('connection', (socket) => {
          
      }
       else {
-        let random = Math.round(Math.random() * (Questions.length -1));
-        let question = Questions[random].question ;
-        let answer = Questions[random].rightanswer;
-        let questionanswer = Questions[random].answer;
-        //send to client
-        io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
-
+        let askedquestion = [];
+        let random;
+        do {
+          random = Math.round(Math.random() * (Questions.length -1));
+        }while(askedquestion.includes(random))
+          let question = Questions[random].question ;
+          let answer = Questions[random].rightanswer;
+          let questionanswer = Questions[random].answer;
+          askedquestion.push(random);
+          //send to client
+          io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
       }
       
 

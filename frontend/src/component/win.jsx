@@ -26,7 +26,7 @@ export const WinningCard = ({socket}) => {
   
     return (
       <div className="hidden absolute h-full w-full z-50 flex flex-col justify-center items-center bg-grey bg-opacity-30" ref={winRef}>
-              <div className="flex flex-col justify-center items-center shadow-lg rounded-md h-[400px] w-[450px]   bg-white text-center">
+              <div className="flex flex-col justify-center items-center shadow-lg rounded-md h-[400px] max-w-[450px]   bg-white text-center">
                 
                   <img src={firework3} alt="" className="w-full h-full bg-center bg-cover rounded-md" /> 
                   <input type="text" value={""} className="absolute z-50 focus:outline-none bg-primary text-white text-2xl w-25 text-center p-2 rounded-sm  bg-opacity-0"  

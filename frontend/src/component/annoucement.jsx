@@ -65,12 +65,12 @@ export const Announcement = ({socket}) => {
 })
    
     return (
-        <div className="flex space-x-1 justify-center p-2 "  ref={announceRef}>
+        <div className="flex space-x-1 justify-start justify-center p-2 "  ref={announceRef}>
         
          <input type="text" value={0} className="w-12 p-2 focus:outline-none  text-blue text-center shadow-lg rounded-[50%] "  
           ref={firstRef} readOnly/>  
              
-           <input type="text" value={"ゲス"} className="focus:outline-none text-secondary text-[30px]  text-center p-1 " style={{backgroundColor: "transparent"}}
+           <input type="text" value={"ゲス"} className="max-w-[250px]  focus:outline-none text-secondary text-[30px]  text-center flex" style={{backgroundColor: "transparent"}}
            ref={middleRef} readOnly/> 
            
            <input type="text" value={0} className="w-12 p-2 focus:outline-none  text-mark shadow-lg rounded-[50%]  text-center" 
