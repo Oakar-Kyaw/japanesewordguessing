@@ -25,8 +25,8 @@ export const Question = ({socket})=>{
         <div className="p-4 m-6   justify-center items-center font-poppins ">
         
         <h1 className="text-center text-mark font-[30px] font-bold mb-2">Question</h1>
-        <div className="flex flex-col">
-            <input type="text" className="flex p-4 focus:outline-none text-center text-secondary bg-primary flex-wrap"  ref={showquestion} value="" readOnly/>  
+        <div className="flex flex-wrap flex-col">
+            <input type="text" className="flex p-4 focus:outline-none text-center text-secondary bg-primary "  ref={showquestion} value="" readOnly/>  
             <input type="text" className="p-4 focus:outline-none bg-primary text-center text-mark "   ref={showanswer} value="" readOnly/>  
         </div>
     </div>

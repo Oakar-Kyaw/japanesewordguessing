@@ -4,7 +4,7 @@ import { useRef } from "react";
 export const Announcement = ({socket}) => {
     const firstRef = useRef(0);
     const secondRef = useRef(0);
-    const middleRef = useRef("ワード・ゲシン");
+    const middleRef = useRef("ゲス");
     
     const announceRef = useRef("");
 
@@ -27,7 +27,7 @@ export const Announcement = ({socket}) => {
     //to show next question 
     socket.on("nextQuestion",()=>{
         middleRef.current.classList.remove("text-mark")
-        middleRef.current.value = "ワード・ゲシング"
+        middleRef.current.value = "ゲス"
     })
     //to show true answer 
     socket.on("showTrueAnswer",()=>{
@@ -70,7 +70,7 @@ export const Announcement = ({socket}) => {
          <input type="text" value={0} className="w-12 p-2 focus:outline-none  text-blue text-center shadow-lg rounded-[50%] "  
           ref={firstRef} readOnly/>  
              
-           <input type="text" value={"ワード・ゲシング"} className="focus:outline-none text-secondary text-[30px]  text-center p-1 " style={{backgroundColor: "transparent"}}
+           <input type="text" value={"ゲス"} className="focus:outline-none text-secondary text-[30px]  text-center p-1 " style={{backgroundColor: "transparent"}}
            ref={middleRef} readOnly/> 
            
            <input type="text" value={0} className="w-12 p-2 focus:outline-none  text-mark shadow-lg rounded-[50%]  text-center" 
