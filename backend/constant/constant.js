@@ -1,11 +1,6 @@
 
 module.exports  =[
     {
-        question:"How do we say 'My Name is yamada.' in japanese. ",
-        answer:"Write its hiragana not including Kanji",
-        rightanswer:["わたしのなまえはやまだです",""],
-    },
-    {
         question:"＿＿ます。",
         answer:"Write its hiragana　Kanji:合",
         rightanswer:["あい"],
