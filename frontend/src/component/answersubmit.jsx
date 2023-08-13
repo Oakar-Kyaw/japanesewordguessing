@@ -9,13 +9,21 @@ import wrongsong from "../music/wrong.m4a";
 export const AnswerSubmit =({socket})=>{
      
      const submitbutton = useRef();
-     const rightRef = useRef(null);
-     const wrongRef = useRef(null);
+     const rightRef = useRef("");
+     const wrongRef = useRef("");
     
 
      //when receive play right 
-     socket.on("playright",()=>{
-       rightRef.current.play()
+     socket.on("playright",(playSong,playSongId)=>{
+       if(playSong){
+        rightRef.current.play()
+       }
+       else {
+         if(socket.id == playSongId){
+
+          rightRef.current.play()
+         }
+       }
      })
 
     
@@ -70,8 +78,6 @@ export const AnswerSubmit =({socket})=>{
           
           else {
            wrongRef.current.play();
-          
-          
           }
         
 

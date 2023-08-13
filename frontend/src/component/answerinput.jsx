@@ -23,7 +23,6 @@ export const AnswerInput = ({socket})=>{
 
     //to show false icon
     socket.on('showFalse',()=>{
-      
       falseIcon.current.classList.remove("hidden");
     })
 

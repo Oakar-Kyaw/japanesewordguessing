@@ -22,6 +22,7 @@ let rooms=[];
 const generateRoomId = ()=> {
   return Math.random().toString(36).substring(2, 6);
 }
+
 //to search room id and return 
 const searchRoomId = (totalroom,id)=>{
     const desiredPlayerId = id;
@@ -39,28 +40,36 @@ const searchRoomId = (totalroom,id)=>{
 }
 
 
+
   
 io.on('connection', (socket) => { 
-   
+    let askedquestion = [];
+    let personGenerateQuestion;
     clientCount++;
     //find if there is any vacant room
     let index = rooms.findIndex(room => room.vacant == true);
     if(index >= 0 ){
         let player1;
         const room = rooms[index];
+        //player properties of room objects
         room.players[socket.id]={ 
               point:0,
+              playsong:false
         }
         room.vacant = false;
-        
+        //join room using id
         socket.join(room.roomId);
+
         for (let player in room.players){
           if (player != socket.id){
            player1 = player;
           }
         }
-        io.to([room.id,socket.id,player1]).emit("joined");
-        console.log(JSON.stringify(rooms))
+        //to generate question only once
+        room.questionPerson = socket.id;
+       //emit join event to client
+        io.to([room.id,socket.id,player1]).emit("joined",room.questionPerson);
+        
     }
     else {
         //create room if there is no vacant or first user
@@ -70,9 +79,12 @@ io.on('connection', (socket) => {
         playfirst:0,
         attempt:3,
         level:0,
+        questionPerson:0,
+        questionIndex:[],
         players:{
             [socket.id]:{
                 point:0,
+                playsong:false
             }
         }
        }
@@ -94,10 +106,9 @@ io.on('connection', (socket) => {
          nextClient = player;
         }
       }
-      
-      
-      if(room.level > 3){
-      
+      //check if the player play more than 5 question
+      if(room.level > 4){
+         //compare the score
          if(room.players[id].point > room.players[nextClient].point ){
              winUser = id;
              io.to([foundRoomId,id,nextClient]).emit('win',winUser)
@@ -115,25 +126,26 @@ io.on('connection', (socket) => {
          
      }
       else {
-        let askedquestion = [];
-        let random;
+         let random;
+        //check random number not to overlap
         do {
           random = Math.round(Math.random() * (Questions.length -1));
-        }while(askedquestion.includes(random))
+        }while(room.questionIndex.includes(random))
           let question = Questions[random].question ;
           let answer = Questions[random].rightanswer;
           let questionanswer = Questions[random].answer;
-          askedquestion.push(random);
-          //send to client
+         //push generate number to room's questionIndex array
+          room.questionIndex.push(random);
+          //send question to client
           io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
-      }
       
-
+      }
     })
     //when the user click first
     socket.on('clickFirst',(id)=>{
        let nextClient;
        let setPlayerFirst;
+       //search roomId using id parameter
        let foundRoomId = searchRoomId(rooms,id)
        let roomIndex = rooms.findIndex(room=> room.roomId == foundRoomId);
        let room = rooms[roomIndex];
@@ -142,12 +154,13 @@ io.on('connection', (socket) => {
           nextClient = player;
          }
        }
+       //only set true when the user click button that made to answer first
+       room.players[id].playsong = true;
+       //if playfirst doesn't have id, then set playfirst to id
        if(room.playfirst == 0){
          room.playfirst = id;
          setPlayerFirst = true;
-       }
-
-       
+       }       
        //to get both of the client , write io.to([roomid,senderid,receiverId]).emit()
       io.to([foundRoomId,id,nextClient]).emit('setActive',room.playfirst,foundRoomId,setPlayerFirst)
        
@@ -161,14 +174,14 @@ io.on('connection', (socket) => {
         let roomid = searchRoomId(rooms,id);
         let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
         let room = rooms[roomIndex];
+        // add point when the user is right
         room.players[id].point++;
         for (let player in room.players){
           if (player != id){
            nextClient = player;
           }
         }
-        
-         
+      //send point event to room , in annoucement.jsx  
       io.to([roomid,id,nextClient]).emit("point",room.players[id].point,id);
      
 
@@ -188,18 +201,18 @@ io.on('connection', (socket) => {
             nextPlayer= playerId;
          }
       }
-      
+      //if the attempt value is 0, emit trueAnswer emit to announce.jsx
       if(attempt == 0 ){
-        setTimeout(()=>{io.to([foundRoom,id,nextPlayer]).emit('showTrueAnswer')},2000)
+        setTimeout(()=>{io.to([foundRoom,id,nextPlayer]).emit('showTrueAnswer',room.questionPerson)},2000)
       }
       else{
+      //if the attempt value isn't 0, subtract 1 to that value
       room.playfirst = nextPlayer;
       setPlayerFirst = true;
       room.attempt--;
-      
-      //io.to([foundRoom,id,nextPlayer]).emit('stopTimer');
+      //emit showfalse event to answerinput.jsx
       io.to([foundRoom,id,nextPlayer]).emit('showFalse');
-     
+      // emit setactive event to answersubmit.jsx
        io.to([foundRoom,id,nextPlayer]).emit('setActive',room.playfirst,foundRoom,setPlayerFirst); 
 
        }
@@ -207,7 +220,7 @@ io.on('connection', (socket) => {
 
  
      //show correct answeer in input
-     socket.on("showAnswer",(answer,id,notAddLevel)=>{
+     socket.on("showAnswer",(answer,id)=>{
        let nextClient;
        let roomid = searchRoomId(rooms,id)
        let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
@@ -219,22 +232,22 @@ io.on('connection', (socket) => {
           }
         }
         room.playfirst= 0;
-        room.attempt = 4;
-        if(!notAddLevel){
-            room.level++ ;
-        }
+        room.attempt = 3;
+        room.level++ ;
+        //emit show event to answerinput.jsx
         io.to([roomid,id,nextClient]).emit('show',answer,id)
-
+        //emit nextQuestion to question.jsx, id to emit only once checing whether id and client.id is equal or not, questionPerson to emit not to overlap questionIndex 
         setTimeout(()=>{
-         io.to([roomid,id,nextClient]).emit('nextQuestion') 
-        },3000)
+         io.to([roomid,id,nextClient]).emit('nextQuestion',id,room.questionPerson) 
+        },2000)
         
         
     })
 
     //emit play song from server when the user is right
     socket.on("playRight",(id)=>{
-      let nextClient;
+       let nextClient;
+       let playSongId;
        let roomid = searchRoomId(rooms,id)
        let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
        let room = rooms[roomIndex];
@@ -244,7 +257,21 @@ io.on('connection', (socket) => {
            nextClient = player;
           }
         }
-        io.to([roomid,id,nextClient]).emit('playright')
+        //to play song both of the player
+        if(room.players[id].playsong && room.players[id].playsong ){
+          io.to([roomid,id,nextClient]).emit('playright',true)
+        }
+        //chose only id tha can play song
+        else{
+           if(room.players[id].playsong){
+             playSongId = id ;
+           }
+           else {
+             playSongId = nextClient
+           }
+           io.to([roomid,id,nextClient]).emit('playright',false,playSongId)
+        }
+       
     })
 
     //emit play song from server when the user is wrong
@@ -262,22 +289,22 @@ io.on('connection', (socket) => {
         io.to([roomid,id,nextClient]).emit('playwrong')
     })
 
-    
-
-    //stop timer
+    //to show false icon 
     socket.on("showFalseIcon",(id)=>{
-       let nextClient;
+       let next;
       let roomid = searchRoomId(rooms,id)
        let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
        let room = rooms[roomIndex];
        for (let player in room.players){
           if (player != id){
-           nextClient = player;
+           next = player;
           }
        }
        io.to([roomid,id]).emit('showFalse')
     })
+
     socket.on('disconnect',()=>{
+       
        let nextClient;
        let roomid = searchRoomId(rooms,socket.id)
        let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
@@ -287,7 +314,7 @@ io.on('connection', (socket) => {
            nextClient = player;
           }
         }
-
+        //emit event to disappar waiting card
         io.to([roomid,socket.id,nextClient]).emit('waiting')
     })
 

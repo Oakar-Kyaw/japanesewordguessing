@@ -10,12 +10,9 @@ export const Announcement = ({socket}) => {
 
     //waiting for other player
     socket.on('waiting',()=>{
-       
         announceRef.current.classList.add("justify-center")
         firstRef.current.classList.add("hidden")
         secondRef.current.classList.add("hidden")
-        
-        
     })
     
     //when the other user joined 
@@ -30,10 +27,12 @@ export const Announcement = ({socket}) => {
         middleRef.current.value = "ゲス"
     })
     //to show true answer 
-    socket.on("showTrueAnswer",()=>{
+    socket.on("showTrueAnswer",(questionPerson)=>{
         const answer = JSON.parse(localStorage.getItem('question')).answer;
-        socket.emit("showAnswer", answer,socket.id,true);
-        socket.emit("playRight",socket.id);
+        if(questionPerson == socket.id){
+          socket.emit("showAnswer", answer,socket.id);
+          socket.emit("playRight",socket.id);  
+        }
         middleRef.current.classList.add("text-mark")
         middleRef.current.value = "Nobody is Right"
     })
