@@ -67,9 +67,10 @@ io.on('connection', (socket) => {
         }
         //to generate question only once
         room.questionPerson = socket.id;
+
        //emit join event to client
-        io.to([room.id,socket.id,player1]).emit("joined",room.questionPerson);
-        
+        io.to([room.id,socket.id,player1]).emit("joined",socket.id,room.questionPerson);
+        console.log("joined room ai s"+JSON.stringify(rooms))
     }
     else {
         //create room if there is no vacant or first user
@@ -81,6 +82,7 @@ io.on('connection', (socket) => {
         level:0,
         questionPerson:0,
         questionIndex:[],
+        gameover:false,
         players:{
             [socket.id]:{
                 point:0,
@@ -108,11 +110,12 @@ io.on('connection', (socket) => {
       }
       //check if the player play more than 5 question
       if(room.level > 4){
+         room.gameover=true;
          //compare the score
          if(room.players[id].point > room.players[nextClient].point ){
              winUser = id;
              io.to([foundRoomId,id,nextClient]).emit('win',winUser)
-            
+             
          }
          else if (room.players[id].point < room.players[nextClient].point){
               winUser = nextClient;
@@ -123,7 +126,7 @@ io.on('connection', (socket) => {
           io.to([foundRoomId,id,nextClient]).emit('draw')
           
          }
-         
+      
      }
       else {
          let random;
@@ -145,6 +148,7 @@ io.on('connection', (socket) => {
     socket.on('clickFirst',(id)=>{
        let nextClient;
        let setPlayerFirst;
+      
        //search roomId using id parameter
        let foundRoomId = searchRoomId(rooms,id)
        let roomIndex = rooms.findIndex(room=> room.roomId == foundRoomId);
@@ -154,6 +158,8 @@ io.on('connection', (socket) => {
           nextClient = player;
          }
        }
+       if(!room.gameover && nextClient){
+       
        //only set true when the user click button that made to answer first
        room.players[id].playsong = true;
        //if playfirst doesn't have id, then set playfirst to id
@@ -163,7 +169,7 @@ io.on('connection', (socket) => {
        }       
        //to get both of the client , write io.to([roomid,senderid,receiverId]).emit()
       io.to([foundRoomId,id,nextClient]).emit('setActive',room.playfirst,foundRoomId,setPlayerFirst)
-       
+       } 
     })
 
    
@@ -309,14 +315,42 @@ io.on('connection', (socket) => {
        let roomid = searchRoomId(rooms,socket.id)
        let roomIndex = rooms.findIndex(room=> room.roomId == roomid);
        let room = rooms[roomIndex];
+      
         for (let player in room.players){
           if (player != socket.id){
            nextClient = player;
           }
         }
-        //emit event to disappar waiting card
-        io.to([roomid,socket.id,nextClient]).emit('waiting')
-    })
+       
+          
+         if (nextClient && room.gameover){
+          io.to([roomid,nextClient]).emit('reset',true)
+         }
+         else if(nextClient && !room.gameover){
+             //Reset the room properties 
+          delete room.players[socket.id]
+          room.vacant = true;
+          room.playfirst = 0;
+          room.attempt = 3;
+          room.level = 0;
+          room.questionPerson = 0;
+          room.players[nextClient].point = 0;
+          room.players[nextClient].playsong = false;
+         
+          io.to([roomid,nextClient]).emit("point",room.players[nextClient].point);
+
+          //emit event to disappar waiting card
+          io.to([roomid,socket.id,nextClient]).emit('waiting')
+         }
+         else  {
+         rooms.splice(roomIndex,1);
+        
+          io.to([roomid,nextClient]).emit('reset',false)
+         }
+       
+        
+      }
+    )
 
 
  });

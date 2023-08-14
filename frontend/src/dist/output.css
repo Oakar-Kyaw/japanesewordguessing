@@ -665,10 +665,6 @@ video {
   width: 100%;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
 .min-w-\[150px\] {
   min-width: 150px;
 }
@@ -833,6 +829,10 @@ video {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .text-center {

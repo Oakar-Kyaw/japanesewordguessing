@@ -43,6 +43,12 @@ export const Announcement = ({socket}) => {
            middleRef.current.classList.remove("text-mark")
            middleRef.current.value = "You Are Right"
        }
+       else if (!id){
+           firstRef.current.value = point;
+           middleRef.current.classList.remove("text-mark")
+           middleRef.current.value = "ゲス"
+           secondRef.current.value = point;
+       }
        else {
            secondRef.current.value = point;
            middleRef.current.classList.add("text-mark")

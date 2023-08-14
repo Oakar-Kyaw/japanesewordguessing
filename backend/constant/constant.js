@@ -6,13 +6,38 @@ module.exports  =[
         rightanswer:["あい"],
     },
     {
+        question:"コンサート＿さそう",
+        answer:"Fill in the blank",
+        rightanswer:["に"],
+    },
+    {
+        question:"Weekday",
+        answer:"Write that word in japanese。",
+        rightanswer:["へいじつ","平日"],
+    },
+    {
+        question:"pack for the trip = にもつを＿。＿。る",
+        answer:"Fill in the blank。",
+        rightanswer:["つめ"],
+    },
+    {
+        question:"海外りょこう＝foreign travel",
+        answer:"＿。＿。りょこう=domestic travel",
+        rightanswer:["こくない","国内"],
+    },
+    {
+        question:"行く",
+        answer:"Writes its hiragana。Kanji:行",
+        rightanswer:["い"],
+    },
+    {
         question:"分析",
         answer:"Write its hiragana",
         rightanswer:["ぶんせき"]
     },
     {
         question:"Write the word 'Play' in Japanese.",
-        answer:"あ＿。＿。＿。す。",
+        answer:"_。＿。＿。＿。＿。",
         rightanswer:["あそびます"],
     },
     {
@@ -29,6 +54,11 @@ module.exports  =[
         question:"宴会 = party",
         answer:"Write its hiragana",
         rightanswer:["えんかい"],
+    },
+    {
+        question:"まゆ",
+        answer:"Write its hiragana",
+        rightanswer:["あかんぼう"],
     },
     {
         question:"受付 = reception",
@@ -64,6 +94,11 @@ module.exports  =[
         question:"赤ん坊",
         answer:"Write its hiragana",
         rightanswer:["あかんぼう"],
+    },
+    {
+        question:"Floor = ＿。＿。＿。＿",
+        answer:"Write that word in japanese",
+        rightanswer:["じゅうたん","カーペット"],
     },
 
     
