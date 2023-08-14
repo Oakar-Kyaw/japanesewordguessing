@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
 
        //emit join event to client
         io.to([room.id,socket.id,player1]).emit("joined",socket.id,room.questionPerson);
-        console.log("joined room ai s"+JSON.stringify(rooms))
+        
     }
     else {
         //create room if there is no vacant or first user
