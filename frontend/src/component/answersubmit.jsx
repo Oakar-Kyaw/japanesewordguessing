@@ -87,7 +87,7 @@ export const AnswerSubmit =({socket})=>{
       <section className="">
         <form onSubmit={formik.handleSubmit}  className="flex flex-col
         space-y-2 items-center">
-            <input type="text" id="answer" name="answer" onChange={formik.handleChange} value={formik.values.answer} className=" rounded-full shadow-lg h-8 font-poppins p-4 focus:outline-none min-w-[150px] " placeholder="Your Answer" />
+            <input type="text" id="answer" name="answer" onChange={formik.handleChange} value={formik.values.answer} className=" rounded-full shadow-lg h-8 font-poppins p-4 focus:outline-none min-w-[80px] " placeholder="Your Answer" />
             <audio ref={rightRef} src={rightsong} />
             <audio ref={wrongRef} src={wrongsong} />
             <button ref={submitbutton} className="bg-buttonDisable p-2 text-white font-poppins rounded-md shadow-lg" disabled={true} type="submit">Submit</button>
