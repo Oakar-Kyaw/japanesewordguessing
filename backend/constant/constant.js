@@ -6,6 +6,11 @@ module.exports  =[
         rightanswer:["あい"],
     },
     {
+        question:"好き",
+        answer:"Writes its hiragana。Kanji:好",
+        rightanswer:["す"],
+    },
+    {
         question:"コンサート＿さそう",
         answer:"Fill in the blank",
         rightanswer:["に"],
@@ -56,9 +61,9 @@ module.exports  =[
         rightanswer:["えんかい"],
     },
     {
-        question:"まゆ",
-        answer:"Write its hiragana",
-        rightanswer:["あかんぼう"],
+        question:"bank",
+        answer:"Write that word in japanese　。",
+        rightanswer:["銀行","ぎんごう"],
     },
     {
         question:"受付 = reception",

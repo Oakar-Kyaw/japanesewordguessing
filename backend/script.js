@@ -108,6 +108,7 @@ io.on('connection', (socket) => {
          nextClient = player;
         }
       }
+      if(nextClient){
       //check if the player play more than 5 question
       if(room.level > 4){
          room.gameover=true;
@@ -143,6 +144,7 @@ io.on('connection', (socket) => {
           io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
       
       }
+    }
     })
     //when the user click first
     socket.on('clickFirst',(id)=>{
@@ -187,9 +189,10 @@ io.on('connection', (socket) => {
            nextClient = player;
           }
         }
+      if(nextClient){
       //send point event to room , in annoucement.jsx  
       io.to([roomid,id,nextClient]).emit("point",room.players[id].point,id);
-     
+      }
 
     })
 
@@ -207,6 +210,8 @@ io.on('connection', (socket) => {
             nextPlayer= playerId;
          }
       }
+      
+      if(nextPlayer){
       //if the attempt value is 0, emit trueAnswer emit to announce.jsx
       if(attempt == 0 ){
         setTimeout(()=>{io.to([foundRoom,id,nextPlayer]).emit('showTrueAnswer',room.questionPerson)},2000)
@@ -222,6 +227,7 @@ io.on('connection', (socket) => {
        io.to([foundRoom,id,nextPlayer]).emit('setActive',room.playfirst,foundRoom,setPlayerFirst); 
 
        }
+      }
        })
 
  
@@ -237,6 +243,8 @@ io.on('connection', (socket) => {
            nextClient = player;
           }
         }
+        if(nextClient){
+
         room.playfirst= 0;
         room.attempt = 3;
         room.level++ ;
@@ -246,7 +254,7 @@ io.on('connection', (socket) => {
         setTimeout(()=>{
          io.to([roomid,id,nextClient]).emit('nextQuestion',id,room.questionPerson) 
         },2000)
-        
+      }
         
     })
 
@@ -329,7 +337,9 @@ io.on('connection', (socket) => {
          else if(nextClient && !room.gameover){
              //Reset the room properties 
           delete room.players[socket.id]
-          room.vacant = true;
+          setTimeout(()=>{
+            room.vacant = true;
+          },3000)
           room.playfirst = 0;
           room.attempt = 3;
           room.level = 0;
@@ -349,9 +359,9 @@ io.on('connection', (socket) => {
          }
        
         
-      }
+      } 
     )
-
+    
 
  });
 server.listen(PORT,()=>{
