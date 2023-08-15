@@ -32,7 +32,7 @@ socket.on("setActive", (id, roomId ,setPlayerFirst) => {
 
 
 
-socket.on("nextQuestion", (answer, id) => {
+socket.on("show", (answer, id) => {
   
   clearInterval(intervalId);
   clearTimeout(timeoutId);
