@@ -31,7 +31,7 @@ export const AnswerInput = ({socket})=>{
            <div className="flex flex-row items-center justify-center space-x-4 mb-2 mx-6 mt-2">
           
             <div>
-              <input type="text" className="min-w-[150px] rounded-full shadow-lg h-8 font-poppins p-4 focus:outline-none w-[350px] " ref={showAnswer} placeholder="True Answer will show here"  readOnly/>  
+              <input type="text" className="min-w-[150px] rounded-full shadow-lg h-8 font-poppins p-4 focus:outline-none min-w-[280px] " ref={showAnswer} placeholder="True Answer will show here"  readOnly/>  
             </div>
             
              <div className="hidden flex items-center justify-center h-6 w-6 bg-mark shadow-lg rounded-full" ref={falseIcon}><img src={wrong} alt="" className="" /></div>
