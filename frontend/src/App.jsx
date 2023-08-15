@@ -16,7 +16,7 @@ export const App = ()=>{
   
 //https://japanesewordgameapi.onrender.com/
 //http://localhost:3001
-   const socket = io("http://localhost:3001", {transports: ['websocket']});
+   const socket = io("https://japanesewordgameapi.onrender.com/", {transports: ['websocket']});
    socket.on("saveRoom",(room)=>{
       localStorage.setItem('room',room)
    })
