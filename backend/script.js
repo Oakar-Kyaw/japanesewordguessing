@@ -129,7 +129,7 @@ io.on('connection', (socket) => {
           
          }
         }
-     }
+     
       else {
          let random;
         //check random number not to overlap
@@ -145,7 +145,7 @@ io.on('connection', (socket) => {
           io.to([foundRoomId,id,nextClient]).emit('question',question,answer,questionanswer)
       
       }
-    
+      }
     })
     //when the user click first
     socket.on('clickFirst',(id)=>{
