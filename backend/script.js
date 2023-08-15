@@ -103,6 +103,7 @@ io.on('connection', (socket) => {
       let foundRoomId = searchRoomId(rooms,id)
       let roomIndex = rooms.findIndex(room=> room.roomId == foundRoomId);
       let room = rooms[roomIndex];
+      if(room){
       for (let player in room.players){
         if (player != id){
          nextClient = player;
@@ -127,7 +128,7 @@ io.on('connection', (socket) => {
           io.to([foundRoomId,id,nextClient]).emit('draw')
           
          }
-      
+        }
      }
       else {
          let random;
